@@ -2,21 +2,20 @@
 
 html, body{
     height: 100%;
+    margin: 0;
 }
 
 body{
     align-items: center;
-    background: #642b73;
     background: linear-gradient(to bottom, #eec924, #6a6315);
+    background-attachment: fixed;
     display: flex;
     font-family: 'Open Sans';
     justify-content: center;
-    overflow: hidden;
-    perspective: 1800px;
     text-align: center;
-    margin: 0 20px;
 }
-h1{
+
+h1 {
     color: #3e3e42;
     font-size: 32px;
     font-weight: 800;
@@ -24,13 +23,15 @@ h1{
     margin-bottom: 30px;
     transform: translateZ(35px);
 }
-h3{
+
+h3 {
     color: #eb285d;
     font-size: 16px;
     margin-bottom: 6px;
     transform: translateZ(25px);
 }
-.cards{
+
+.cards {
     background: #fff;
     border-radius: 15px;
     box-shadow: 0px 10px 20px 20px rgba(0, 0, 0, 0.17);
@@ -41,9 +42,15 @@ h3{
     transform-origin: 50% 50%;
     transform-style: preserve-3d;
     transform: rotateX(11deg) rotateY(16.5deg);
-    min-width: 595px;
 }
-.card{
+
+.container{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.card {
+    background: #fff;
     border-radius: 15px;
     box-shadow: 5px 5px 20px -5px rgba(0, 0, 0, 0.6);
     display: inline-block;
@@ -57,14 +64,18 @@ h3{
     width: 175px;
     text-align: center;
 }
-.card:not(:last-child){
+
+.card:not(:last-child) {
     margin-right: 30px;
 }
-.img{
+
+.img {
     position: relative;
     height: 100%;
 }
-.bg{
+
+.bg {
+    background-size: cover; 
     bottom: -50px;
     left: -50px;
     position: absolute;
@@ -74,29 +85,32 @@ h3{
     transform: translateZ(-50px);
     z-index: 0;
 }
-.one .img{
+
+.one .img {
     top: 14px;
     right: -5px;
     height: 110%;
 }
-.one .bg{
+
+.one .bg {
     background: url('../imgs/3dr_monobg.jpg') center no-repeat;
 }
-.two .img{
+
+.two .img {
     top: 20px;
     left: 5px;
 }
-.two .bg{
+
+.two .bg {
     background: url('../imgs/3dr_spirited.jpg') center no-repeat;
 }
-.three .img{
-    left: -4px;
-    height: 110%;
-}
-.three .bg{
+
+
+.three .bg {
     background: url('../imgs/3dr_howlbg.jpg') center no-repeat;
 }
-.text{
+
+.text {
     align-items: center;
     background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.95) 100%);
     position: absolute;
@@ -108,11 +122,39 @@ h3{
     width: 100%;
     z-index: 2;
 }
-.title{
+
+.title {
     color: #fff;
     font-size: 18px;
     font-weight: 700;
     padding: 0 10px;
     margin-bottom: 3px;
     text-shadow: 0 0 3px #FF0000, 0 0 5px #0000FF;
+}
+
+/* Estilos para dispositivos móveis */
+@media only screen and (max-width: 600px) {
+    html{
+        overflow-x: hidden;
+    }
+    .container {
+        max-width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        flex-direction: column;
+    }
+    .cards {
+        margin: 20px auto;
+        padding: 30px;
+    }
+    .card {
+        display: inline-block;
+        margin-right: 20px;
+        width: calc(100% + 5px);
+        margin-top: 2vh;
+    }
+    .card:nth-child(3n) {
+        margin-right: 0;
+    }
 }
