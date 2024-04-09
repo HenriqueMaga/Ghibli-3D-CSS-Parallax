@@ -58,4 +58,37 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         })
     }, false);
+
+    document.addEventListener(`deviceorientation`, (event) => {
+        if(timeout){
+            window.cancelAnimationFrame(timeout);
+        }
+        const alpha = event.alpha; // rotação ao redor do eixo Z (em graus)
+        const beta = event.beta; // inclinação para frente/trás
+        const gamma = event.gamma; // inclinação para a esquerda/direita
+
+        // Normalizar os valores de beta e gamma para que fiquem dentro do intervalo [-90, 90]
+        const normalizedBeta = Math.max(-90, Math.min(90, beta));
+        const normalizedGamma = Math.max(-90, Math.min(90, gamma));
+
+        // Mapear os valores de beta e gamma para o intervalo [-RANGE/2, RANGE/2]
+        const xValue = calcular(normalizedGamma, 180) - RANGE / 2;
+        const yValue = calcular(normalizedBeta, 180) - RANGE / 2;
+
+
+        timeout = window.requestAnimationFrame(() => {
+            const xValue = calcular(x , window.innerWidth);
+            const yValue = calcular(y, window.innerHeight);
+
+            cards.style.transform = `rotateX(${yValue}deg) rotateY(${xValue}deg)`;
+
+            [].forEach.call(images, (image) => {
+                image.style.transform = `translateX(${-xValue}px) translateY(${yValue}px)`;
+            });
+
+            [].forEach.call(backgrouds, (bg) => {
+                bg.style.backgroundPosition = `${-xValue*.45}px ${-yValue*.45}px`;
+            });
+        })
+    }, false);
 });
